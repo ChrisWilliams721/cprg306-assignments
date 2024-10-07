@@ -11,9 +11,10 @@ export default function Root() {
         <li>
           <Link className="text-2xl  text-cyan-500 hover:text-cyan-300 "  href="./week-3" >Week 3 Assignment</Link>
         </li>
+        <li>
+          <Link className="text-2xl  text-cyan-500 hover:text-cyan-300 "  href="./week-4" >Week 4 Assignment</Link>
+        </li>
       </div>
-      
-      
     </main>
   )
 };
