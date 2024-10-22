@@ -29,10 +29,11 @@ export default function ItemList() {
   });
   return(
     <div>
-      <h1>Shopping List</h1>
-
       <label>Filter by category: </label>
-      <select value={filterCategory} onChange={(event) => setFilterCategory(event.target.value)}>
+      <select
+      className="text-sm text-black"
+      value={filterCategory} 
+      onChange={(event) => setFilterCategory(event.target.value)}>
         <option value={"all"}>All category</option>
         <option value={"dairy"}>dairy</option>
         <option value={"bakery"}>bakery</option>
