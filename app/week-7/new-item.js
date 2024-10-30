@@ -1,45 +1,41 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from "react";
 
-export default function Page() {
+export default function NewItem({onAddItem}){
+
     const [name, setName] = useState("");
     const [category, setCategory] = useState("produce");
     const [quantity, setQuantity] = useState(1);
     
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    // Function to handle increment of quantity
+        const newItem = {
+            id: Math.random().toString(36).substr(2, 9), 
+            name,
+            quantity,
+            category
+        };
+
+        onAddItem(newItem);
+
+        setName("");
+        setQuantity(1);
+        setCategory("produce");
+    }
     const Increment = () => {
         if (quantity < 20) {
             setQuantity(quantity + 1);
         }
     };
 
-    // Function to handle decrement of quantity
     const Decrement = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
         }
     };
-
-    // Form submission function
-    const handleSubmission = (event) => {
-        event.preventDefault();
-        const item = {
-            name: name,
-            quantity: quantity,
-            category: category
-        };
-        
-        alert(`Item Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
-        console.log(item);  
-        setName("");
-        setQuantity(1);
-        setCategory("produce");
-    };
-
-    return (
-        <form className="flex flex-col gap-6 p-6  shadow-lg" onSubmit={handleSubmission}>
+    return(
+        <form className="flex flex-col gap-6 p-6  shadow-lg" onSubmit={handleSubmit}>
 
         <div className="flex flex-col">
             <label className="text-2x1">Name:</label>
@@ -87,6 +83,5 @@ export default function Page() {
             Submit
         </button>
     </form>
-    
-    );
+    )
 }
