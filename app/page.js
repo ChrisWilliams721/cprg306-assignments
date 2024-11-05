@@ -23,6 +23,9 @@ export default function Root() {
         <li>
           <Link className="text-2xl  text-cyan-500 hover:text-cyan-300 "  href="./week-7" >Week 7 Assignment</Link>
         </li>
+        <li>
+          <Link className="text-2xl  text-cyan-500 hover:text-cyan-300 "  href="./week-8" >Week 8 Assignment</Link>
+        </li>
       </div>
     </main>
   )
