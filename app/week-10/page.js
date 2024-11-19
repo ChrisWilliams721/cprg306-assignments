@@ -8,7 +8,7 @@ export default function Page() {
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
     return(
         <div>
-            <h1 className="text-3xl font-bold mb-4 underline">Shopping List</h1>
+            <h1 className="text-3xl font-bold mb-4 underline">Shoppiying List</h1>
             <p>{user ? "Signed in as " + user.email : 'Not signed in'}</p>
                 <p>
                     {user ? (
