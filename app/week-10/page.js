@@ -14,7 +14,7 @@ export default function Page() {
                     {user ? (
                         <div>
                             <button onClick={firebaseSignOut}>Sign out</button> <br/>
-                            <button onClick={() => window.location.href = '/week-9/shopping-list'}>continue to Shopping List</button>
+                            <button onClick={() => window.location.href = '/week-10/shopping-list'}>continue to Shopping List</button>
                         </div>
                     ) : (
                         <button onClick={gitHubSignIn}>Sign in with GitHub</button>
