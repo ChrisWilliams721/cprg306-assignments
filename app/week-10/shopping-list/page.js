@@ -4,19 +4,40 @@ import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
 import { useState, useEffect } from "react";
-import getItems from "./__services/shopping-list-service";
-import addItem from "./__services/shopping-list-service";
+import { getItems, addItem } from "../_services/shopping-list-service";
+import { useUserAuth } from "../_utils/auth-context";
 
 export default function Page() {
-    const [itemlist, setItemlist] = useState(itemsData.map((item) => ({ ...item })));
+    const { user } = useUserAuth();
+    const [itemlist, setItemlist] = useState([]);
     const [selectedItemName, setSelectedItemName] = useState("");
 
+    const loadItems = async () => {
+        if (!user?.uid) {
+            console.log("User is not defined");
+            return;
+        }
+        try {
+            const items = await getItems(user.uid);
+            setItemlist(items);
+        } catch (error) {
+            console.error("Error fetching items:", error);
+        }
+    };
+
+    useEffect(() => {
+        if (user?.uid) {
+            loadItems();
+        }
+    }, [user?.uid]);
+
     const handleAddItem = async (newItem) => {
+        if (!user?.uid) return;
         try {
             const id = await addItem(user.uid, newItem);
-            setItemlist((prevItems) => [...prevItems, { id, ...newItem }]);
+            setItemlist((prevItems) => [...prevItems, { ...newItem, id }]);
         } catch (error) {
-            console.error("Failed to add item:", error);
+            console.error("Error adding item:", error);
         }
     };
 
@@ -25,17 +46,6 @@ export default function Page() {
         console.log("Selected item:", cleanedName);
         setSelectedItemName(cleanedName);
     };
-    async function loadItems() {
-        try {
-            const items = await getItems(user.uid);
-            setItemlist(items);
-        } catch (error) {
-            console.error("Failed to fetch items:", error);
-        }
-    }
-    useEffect(() => {
-        loadItems();
-    }, [user]);
 
     return (
         <main>
